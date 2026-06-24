@@ -6,10 +6,27 @@ import Question from "./Question";
 
 export default function Quiz() {
   const [answers, setAnswers] = useState([]);
-  let currentQuestionIndex = answers.length;
+  const [answerState, setAnswerState] = useState("");
+  let currentQuestionIndex =
+    answerState === "" ? answers.length : answers.length - 1;
   let isCompleted = currentQuestionIndex === QUESTIONS.length;
   const handleSelect = useCallback(
     (answer) => {
+      if (answer !== null) {
+        setAnswerState("answered");
+
+        setTimeout(() => {
+          if (answer === QUESTIONS[currentQuestionIndex].answers[0]) {
+            setAnswerState("correct");
+          } else {
+            setAnswerState("wrong");
+          }
+          setTimeout(() => {
+            setAnswerState("");
+          }, 2000);
+        }, 1000);
+      }
+
       setAnswers((prev) => {
         return [...prev, answer];
       });
@@ -31,9 +48,10 @@ export default function Quiz() {
     <div id="quiz">
       <Question
         key={currentQuestionIndex}
-        index={currentQuestionIndex}
-        answers={QUESTIONS[currentQuestionIndex].answers}
+        userAnswers={answers}
+        answerState={answerState}
         onSelect={handleSelect}
+        index={currentQuestionIndex}
       />
     </div>
   );
