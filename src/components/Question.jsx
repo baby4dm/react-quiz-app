@@ -3,7 +3,7 @@ import Answers from "./Answers";
 import QuizProgress from "./QuizProgress";
 import QUESTIONS from "../questions";
 
-export default function Question({ index, answers, selectedAnswer, onSelect }) {
+export default function Question({ index, answers, onSelect }) {
   const [answerState, setAnswerState] = useState("");
 
   const handleSelect = useCallback(
@@ -32,7 +32,7 @@ export default function Question({ index, answers, selectedAnswer, onSelect }) {
         answers={answers}
         onSelect={handleSelect}
         answerState={answerState}
-        selectedAnswer={selectedAnswer}
+        selectedAnswer={answers[index]}
       />
     </div>
   );

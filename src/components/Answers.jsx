@@ -17,6 +17,7 @@ export default function Answers({
     <ul id="answers">
       {shuffledAnswers.current.map((answer) => {
         let styles = "";
+
         if (selectedAnswer === answer) {
           styles = answerState;
         }

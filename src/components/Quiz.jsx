@@ -8,7 +8,6 @@ export default function Quiz() {
   const [answers, setAnswers] = useState([]);
   let currentQuestionIndex = answers.length;
   let isCompleted = currentQuestionIndex === QUESTIONS.length;
-
   const handleSelect = useCallback(
     (answer) => {
       setAnswers((prev) => {
@@ -34,7 +33,6 @@ export default function Quiz() {
         key={currentQuestionIndex}
         index={currentQuestionIndex}
         answers={QUESTIONS[currentQuestionIndex].answers}
-        selectedAnswer={answers[currentQuestionIndex]}
         onSelect={handleSelect}
       />
     </div>
